@@ -4,14 +4,14 @@ local choppingactive = false
 
 Citizen.CreateThread(function()
     for trees, v in pairs(Config.TreeLocations) do
-        exports['qbr-core']:createPrompt(v.name, v.coords, Config.ChoppingKey, 'Start Choping ' .. v.name, {
+        exports['qbr-core']:createPrompt(v.treeType, v.coords, Config.ChoppingKey, 'Start Choping ' .. v.name, {
             type = 'client',
             event = 'rsg_woodcutter:clent:dowoodcutting',
             args = {},
         })
         if v.showblip == true then
-            local TreeBlip = N_0x554d9d53f696d002(1664425300, v.coords)
-            SetBlipSprite(TreeBlip, 1904459580, 52)
+            local TreeBlip = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, v.coords)
+            SetBlipSprite(TreeBlip, 1904459580, 1)
             SetBlipScale(TreeBlip, 0.2)
 			Citizen.InvokeNative(0x9CB1A1623062F402, TreeBlip, v.name)
         end
@@ -35,15 +35,15 @@ AddEventHandler('rsg_woodcutter:clent:dowoodcutting', function()
 				if randomNumber > 95 then
 					TriggerServerEvent('QBCore:Server:RemoveItem', "axe", 1)
 					TriggerEvent("inventory:client:ItemBox", sharedItems["axe"], "remove")
-					exports['rsg_notify']:DisplayNotification('your axe is broken', 5000)
+					exports['qbr-core']:Notify(9, 'your axe is broken', 5000, 0, 'mp_lobby_textures', 'cross', 'COLOR_WHITE')
 				else
 					TriggerServerEvent('rsg_woodcutter:server:giveWoodcuttingReward')
 				end
 			else
-				exports['rsg_notify']:DisplayNotification('you don\'t have a axe!', 5000)
+				exports['qbr-core']:Notify(9, 'you don\'t have a axe!', 5000, 0, 'mp_lobby_textures', 'cross', 'COLOR_WHITE')
 			end
 		else
-			exports['rsg_notify']:DisplayNotification('you are a bit busy right now!', 5000)
+			exports['qbr-core']:Notify(9, 'you are a bit busy right now!', 5000, 0, 'mp_lobby_textures', 'cross', 'COLOR_WHITE')
 		end
 	end, { ['axe'] = 1 })
 end)

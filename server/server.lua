@@ -9,16 +9,16 @@ AddEventHandler('rsg_woodcutter:server:giveWoodcuttingReward', function()
 	if randomNumber == 1 then
 		Player.Functions.AddItem('wood', 1)
 		TriggerClientEvent('inventory:client:ItemBox', src, sharedItems['wood'], "add")
-		TriggerClientEvent('rsg_notify:client:notifiy', src, 'you chopped one wood', 5000)
+		TriggerClientEvent('QBCore:Notify', src, 9, 'you chopped one wood', 5000, 0, 'hud_textures', 'check', 'COLOR_WHITE')
 	elseif randomNumber == 2 then
 		Player.Functions.AddItem('wood', 2)
 		TriggerClientEvent('inventory:client:ItemBox', src, sharedItems['wood'], "add")
-		TriggerClientEvent('rsg_notify:client:notifiy', src, 'you chopped two wood', 5000)
+		TriggerClientEvent('QBCore:Notify', src, 9, 'you chopped two wood', 5000, 0, 'hud_textures', 'check', 'COLOR_WHITE')
 	elseif randomNumber == 3 then
 		Player.Functions.AddItem('wood', 3)
 		TriggerClientEvent('inventory:client:ItemBox', src, sharedItems['wood'], "add")
-		TriggerClientEvent('rsg_notify:client:notifiy', src, 'you chopped three wood', 5000)
+		TriggerClientEvent('QBCore:Notify', src, 9, 'you chopped three wood', 5000, 0, 'hud_textures', 'check', 'COLOR_WHITE')
 	else
-		TriggerClientEvent('rsg_woodcutter:client:alert', src, 'You\'re axe got stuck, no wood this time!', 5000)
+		TriggerClientEvent('QBCore:Notify', src, 9, 'you\'re axe got stuck, no wood this time!', 5000, 0, 'mp_lobby_textures', 'cross', 'COLOR_WHITE')
 	end
 end)
